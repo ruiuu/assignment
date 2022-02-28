@@ -11,4 +11,8 @@ contract  Counter {
     function count() public {
         counter = counter + 1;
     }
+
+    function set(uint num) public {
+        counter = counter + num;
+    }
 }
