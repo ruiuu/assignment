@@ -29,7 +29,6 @@ contract Score {
     }
 
     modifier onlyTeacher{
-        console.log("msg.sender" , msg.sender);
         require(teachers[msg.sender].isValid, "is not teacher");
         _;
     }
