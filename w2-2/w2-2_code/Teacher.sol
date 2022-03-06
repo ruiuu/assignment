@@ -27,17 +27,17 @@ contract Teacher {
     }
 
     function callScoreForAddStudent(address _address, address _studentAdress, string memory _name, uint _score) public isOwner{
-        (bool res,) = _address.call(abi.encodeWithSignature("addStudent(address,string,uint256)", _studentAdress, _name, _score));
+        (bool res,) = _address.delegatecall(abi.encodeWithSignature("addStudent(address,string,uint256)", _studentAdress, _name, _score));
         if (!res) revert();
     }
 
     function callScoreForDeleteStudent(address _address, address _studentAdress) public isOwner{
-        (bool res,) = _address.call(abi.encodeWithSignature("deleteStudent(address)", _studentAdress));
+        (bool res,) = _address.delegatecall(abi.encodeWithSignature("deleteStudent(address)", _studentAdress));
         if (!res) revert();
     }
 
     function callScoreForUpdateStudentScore(address _scoreAddress, address _address, uint _score) public isOwner{
-        (bool res,) = _scoreAddress.call(abi.encodeWithSignature("updateStudentScore(address,uint256)",_address,_score));
+        (bool res,) = _scoreAddress.delegatecall(abi.encodeWithSignature("updateStudentScore(address,uint256)",_address,_score));
         if (!res) revert();
     }
 
