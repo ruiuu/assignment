@@ -21,7 +21,7 @@ const mnemonic = fs.readFileSync(".secret").toString().trim();
  */
 module.exports = {
   solidity: "0.8.4",
-  defaultNetwork: 'goerli',
+  // defaultNetwork: 'dev',
   networks: {
     hardhat: {
     },
