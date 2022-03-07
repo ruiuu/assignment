@@ -29,7 +29,7 @@ contract Score {
     }
 
     modifier onlyTeacher{
-        require(teachers[msg.sender].isValid, "is not teacher");
+        require(teachers[tx.origin].isValid, "is not teacher");
         _;
     }
 
