@@ -24,9 +24,10 @@ const tailLayout = {
 };
 
 const initEthersProvider = (_this) => {
+
   // provider 实例化, 链接 ganache 测试网络
-  const ropstenProvider = new ethers.providers.Web3Provider(window.ethereum);
   //const ropstenProvider = new web3.providers.HttpProvider('http://localhost:8545');
+  const ropstenProvider = new ethers.providers.Web3Provider(window.ethereum);
   const signer = ropstenProvider.getSigner();
 
   // 更新 ropstenProvider
@@ -57,18 +58,6 @@ const initContract = ({ data }) => {
   data.contract = contract;
   data.contractWithSigner = contractWithSigner;
 };
-
-// const mint = async (_this) => {
-//   let { contractWithSigner, currentAddress, contract } = _this.data;
-//   let startMint = await contractWithSigner.transfer(
-//     currentAddress,
-//     1
-//   );
-//   await startMint.wait();
-//   let tokenBalanceOf = await contract.balanceOf(currentAddress);
-//   _this.setState({ tokenBalanceOf });
-// };
-
 const getContractInfo = async (_this) => {
   let {
     contract,
@@ -185,37 +174,6 @@ class PixelHead extends Component {
         });
       });
   }
-  async handleTransfer(values) {
-    let _this = this;
-    const { toAddress, amount, onlineDeposit } = values;
-    const { contractWithSigner, contractAddress } = this.data;
-
-    // 获取授权
-    if (_this.state.isApproved) {
-      let approve = await contractWithSigner.approve(contractAddress, 1000);
-      let bools = await approve.wait();
-      _this.setState({ isApproved: true });
-    } else {
-      let contract = new ethers.Contract(
-        _this.data.contractVaultAddr,
-        _this.data.vaultAbi,
-        _this.data.ropstenProvider
-      );
-      // 使用签名器创建一个新的合约实例，它允许使用可更新状态的方法
-      let contractWithSigner = contract.connect(_this.data.signer);
-      let transaction = await contractWithSigner.deposite(
-        currentAddress,
-        contractVaultAddr
-      );
-      let transactionResult = await transaction.wait();
-      if (transactionResult) {
-        Modal.success({
-          title: "恭喜您",
-          content: "转账成功",
-        });
-      }
-    }
-  }
   async handleDeposite() {
     let _this = this;
     const {
@@ -302,17 +260,6 @@ class PixelHead extends Component {
     console.log(result);
   }
   componentDidMount() {}
-  // handleMint() {
-  //   let _this = this;
-  //   if (!_this.data.currentAddress) {
-  //     Modal.warning({
-  //       title: "看起来你还没有连接钱包",
-  //       content: "请连接 metaMask 钱包",
-  //     });
-  //     return;
-  //   }
-  //   mint(_this);
-  // }
   render() {
     return (
       <>
@@ -363,13 +310,6 @@ class PixelHead extends Component {
                 <p>我的 ETH 余额: {this.state.ethBalance}</p>
                 <p>我的 PXL 余额: {this.state.tokenBalanceOf}</p>
               </div>
-              {/* <Button
-                type="primary"
-                htmlType="submit"
-                onClick={() => this.handleMint()}
-              >
-                挖矿
-              </Button> */}
             </Card>
           </Col>
           <Col style={{ margin: "20px" }}>
