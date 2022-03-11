@@ -218,6 +218,7 @@ class PixelHead extends Component {
       let balanceOfVault = await contract.balanceOf(currentAddress);
       let result = await transaction.wait();
       if (result) {
+      // 解除 loading 状态, 更新页面余额
         _this.setState({
           depositeLoading: false,
           balanceOfVault: ethers.utils.formatEther(balanceOfVault),
@@ -236,7 +237,7 @@ class PixelHead extends Component {
       });
       return;
     }
-
+    // 开启 loading
     this.setState({ withdrawLoading: true });
 
     // 开始转账, 实例化contract
@@ -252,6 +253,7 @@ class PixelHead extends Component {
     let balanceOfVault = await contract.balanceOf(currentAddress);
     let result = await transaction.wait();
     if (result) {
+      // 解除 loading 状态, 更新页面余额
       _this.setState({
         depositeLoading: false,
         balanceOfVault: ethers.utils.formatEther(balanceOfVault),
