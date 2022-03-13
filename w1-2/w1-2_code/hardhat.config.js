@@ -14,10 +14,10 @@ const fs = require("fs");
 const mnemonic = fs.readFileSync(".secret").toString().trim();
 
 // ganache
-const PRIVATE_KEY1 = "a45c8326af663b38275b050dce47830d0831239d6e6a1bbf4c4edb1a979f7a5c";
-const PRIVATE_KEY2 = "d4ebfa85e18d2f34c84cd509f37ca7a82c0707d0439ee10ec19ba38420d0989a";
-const PRIVATE_KEY3 = "7754c44aa412dcacbd30d1752f9b5d4dd13c93da341cb629faaa17e3856cf1b7";
-const PRIVATE_KEY4 = "2047fc8b8d4f3050d2633b4a862c183cfcbdba6e6a26b8d68a6d8c746fa4e092";
+const PRIVATE_KEY1 = "877b9b753b84a8ca9e5c7064a7865c8dd15a74d720b2e6e847588cc36ba0cf7f";
+const PRIVATE_KEY2 = "84188fed521afc16bc1b5d481c3e6fee13f6dff9d238561a84405e7764637ef0";
+const PRIVATE_KEY3 = "06b2fcf0a4e71673c16c79dd12158492d5ed58d71c578305bf7c6ecc6470c668";
+const PRIVATE_KEY4 = "4ad9036807340d40a81eab50af736084df090bd8c1974231673d2bf577a92c77";
 
 // You need to export an object to set up your config
 // Go to https://hardhat.org/config/ to learn more
@@ -29,9 +29,10 @@ module.exports = {
   solidity: "0.8.4",
   defaultNetwork: 'ganache',
   networks: {
-    hardhat: {},
+    hardhat: {
+    },
     ganache: {
-      url: "http://127.0.0.1:7545",
+      url: "http://127.0.0.1:8545",
       accounts: [PRIVATE_KEY1, PRIVATE_KEY2, PRIVATE_KEY3, PRIVATE_KEY4]
     },
     goerli: {
